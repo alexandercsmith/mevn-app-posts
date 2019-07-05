@@ -16,10 +16,20 @@ MEVN Stack:
 
 Server
 ```bash
+# Navigate to /server directory
+$ cd server
+
+# Server on http://localhost:8081
+~/server/$ npm start
 ```
 
 Client
 ```bash
+# Navigate to /client directory
+$ cd client
+
+# Client on http://localhost:8080
+~/client/$ npm run dev
 ```
 
 
