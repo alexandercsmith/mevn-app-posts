@@ -31,6 +31,15 @@ app.get('/posts', (req, res) => {
   }).sort({_id:-1})
 })
 
+// GET - /post/:id
+app.get('/post/:id', (req, res) => {
+  var db = req.db;
+  Post.findById(req.params.id, 'title description', function (error, post) {
+    if (error) { console.error(error); }
+    res.send(post)
+  })
+})
+
 // POST - /posts
 app.post('/posts', (req, res) => {
   var db = req.db;
@@ -48,6 +57,39 @@ app.post('/posts', (req, res) => {
     res.send({
       success: true,
       message: 'Post saved successfully!'
+    })
+  })
+})
+
+// PUT - /posts/:id
+app.put('/posts/:id', (req, res) => {
+  var db = req.db;
+  Post.findById(req.params.id, 'title description', function (error, post) {
+    if (error) { console.error(error); }
+
+    post.title = req.body.title
+    post.description = req.body.description
+    post.save(function (error) {
+      if (error) {
+        console.log(error)
+      }
+      res.send({
+        success: true
+      })
+    })
+  })
+})
+
+// DELETE - /posts/:id
+app.delete('/posts/:id', (req, res) => {
+  var db = req.db;
+  Post.remove({
+    _id: req.params.id
+  }, function(err, post){
+    if (err)
+      res.send(err)
+    res.send({
+      success: true
     })
   })
 })
