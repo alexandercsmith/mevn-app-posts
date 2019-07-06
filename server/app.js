@@ -19,7 +19,7 @@ db.once("open", function(callback){
 });
 
 // Models
-var Post = require("../models/post");
+var Post = require("./models/post");
 
 // GET - /posts
 app.get('/posts', (req, res) => {
